@@ -1,4 +1,5 @@
-from dotenv import load_dotenv
+# from typing import NotRequired
+from dotenv import load_dotenv, main
 import os
 from requests import post, get
 import json
@@ -10,15 +11,46 @@ load_dotenv()
 
 # import the key from the .env file 
 api_key = os.getenv("api_key")
-
 # set the language_code TODO: set language selection
 language_code = "en"
 
 MEN_2023_SEASON_ID = "sr:stage:1023889"
 
 
-# get the brut info about the season, call the format_race_info() to return formated info
-def get_season_info(language_code, season_id, api_key):
+# return the season_data either from cache or api request                   source: indently (yt), Caching your api requests 
+def fetch_season_data(season_id, year = "2023", language_code = "en", update: bool = False):
+
+    # all seasons cache file should follow this naming convention 
+    season_cache = "data/" + season_id + ".json"
+
+    if update:
+        season_data = None
+    else:
+        try:
+            with open(season_cache, 'r') as file:
+                season_data = json.load(file)
+                print("fetched data from local cache")
+        except(FileNotFoundError, json.JSONDecodeError):
+            print("No local cache found") 
+            season_data = None
+
+    if not season_data:
+        print("Fetching new local data")
+        # make api request
+        season_data = get_season_info(season_id, year, language_code) 
+        
+        # write the request in the json file
+        with open(season_cache, 'w') as file:
+            json.dump(season_data, file)
+
+
+    return format_season_info(season_data, year)
+
+
+
+
+# api call to get the info of a given season
+def get_season_info(season_id, api_key = api_key, year = "2023", language_code = "en"):
     url = "https://api.sportradar.us/cycling/trial/v2"
     langue = language_code 
     season = season_id
@@ -28,23 +60,49 @@ def get_season_info(language_code, season_id, api_key):
     result = get(final_url)
     json_result = json.loads(result.content)
 
-    return format_season_info(json_result) 
+    return json_result
 
 
 # take a season as arg and return a list of dict with each race and their info, formated to be use in fullcalendar
-def format_season_info(season):
+def format_season_info(season,year):
     races_info = []
 
     for race in season["stages"][0]["stages"]:
+        id = race["id"]
         description = race["description"]
         date = format_dateTime_to_time(race["scheduled"]) 
+        single_event = race["single_event"] # boolean
         # scheduled_end = race["scheduled_end"]
         
-        # key must be readable by fullcalendar
+        # key must be readable by fullcalendar (not really but I think it's better)
         race_detail = {
-                    "todo":description,
-                    "date":date,
+                    "id" : id, 
+                    "title" : description,  # title of the event in calendar
+                    "date" : date,
+                    "backgroundColor" : "green",
+                    "single_event" : single_event
                      }
+
+        # add the stages if not a single event race in a list
+        if single_event == False:
+            try:
+                race_detail["stages"] = []
+                for stage in race["stages"]:
+                    stage_id = stage["id"]
+                    stage_description =  stage["description"]
+                    stage_date = format_dateTime_to_time(stage["scheduled"]) 
+
+                    stage_detail = {
+                            "id" : stage_id, 
+                            "title": description +" "+ stage_description, 
+                            "date" : stage_date,
+                            }
+                    race_detail["stages"].append(stage_detail)
+            # some races do not have stages entry even though they should (problem from the api provider)
+            except:
+                print(f"no stages detail for {description}")
+
+                
 
         races_info.append(race_detail)
 
@@ -78,3 +136,5 @@ def format_dateTime_to_time(date_time):
 
 # races_info_2023 = format_race_info(season_2023) 
 
+# data = fetch_season_data(MEN_2023_SEASON_ID)
+# print(data)
