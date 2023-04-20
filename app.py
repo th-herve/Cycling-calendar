@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from dotenv import load_dotenv
 import os
 
-from api import get_season_info 
+from api import fetch_season_data, get_season_info 
 
 app = Flask("Cycling calendar")
 
@@ -18,7 +18,7 @@ language_code = "en"
 
 MEN_2023_SEASON_ID = "sr:stage:1023889"
 
-events = get_season_info(language_code,MEN_2023_SEASON_ID,api_key)
+events = fetch_season_data(MEN_2023_SEASON_ID)
 # print(races_info_2023)
 
 
