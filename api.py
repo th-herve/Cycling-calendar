@@ -1,4 +1,5 @@
 # from typing import NotRequired
+from typing import final
 from dotenv import load_dotenv, main
 import os
 from requests import post, get
@@ -21,7 +22,8 @@ MEN_2023_SEASON_ID = "sr:stage:1023889"
 def fetch_season_data(season_id, year = "2023", language_code = "en", update: bool = False):
 
     # all seasons cache file should follow this naming convention 
-    season_cache = "data/" + season_id + ".json"
+    formated_id = season_id.replace(":","")
+    season_cache = "data/" + formated_id + ".json"
 
     if update:
         season_data = None
@@ -35,13 +37,19 @@ def fetch_season_data(season_id, year = "2023", language_code = "en", update: bo
             season_data = None
 
     if not season_data:
-        print("Fetching new local data")
-        # make api request
+        print("Fetching new local data, with api request")
+        # make api request, if it fails, it will return none and the backup will be use instead
         season_data = get_season_info(season_id, year, language_code) 
+
+        if not season_data:
+            backup = "data/backup_srstage1023889.json"
+            with open(backup,'r') as file:
+                season_data = json.load(file)
         
-        # write the request in the json file
-        with open(season_cache, 'w') as file:
-            json.dump(season_data, file)
+        else:
+            # write the request in the json cache file, if it is not from the backup
+            with open(season_cache, 'w') as file:
+                json.dump(season_data, file)
 
 
     return format_season_info(season_data, year)
@@ -57,8 +65,17 @@ def get_season_info(season_id, api_key = api_key, year = "2023", language_code =
     key = api_key
 
     final_url = f"{url}/{langue}/sport_events/{season}/schedule.json?api_key={key}" 
-    result = get(final_url)
-    json_result = json.loads(result.content)
+
+    print(final_url)
+    # try to retrive the api
+    try:
+        result = get(final_url)
+        print(result)
+        json_result = json.loads(result.content)
+    except:
+        print("error: could not retrieve api, fetching from backup instead")
+
+        json_result = None
 
     return json_result
 
