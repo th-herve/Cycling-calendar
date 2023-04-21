@@ -18,7 +18,7 @@ language_code = "en"
 
 MEN_2023_SEASON_ID = "sr:stage:1023889"
 
-events = fetch_season_data(MEN_2023_SEASON_ID)
+events = fetch_season_data(MEN_2023_SEASON_ID, api_key)
 
 @app.route('/')
 def home():
