@@ -5,7 +5,21 @@
 {% endblock %}
 
 {% block main %}
+
+<button data-modal-target="#modal">Open Modal</button>
+
 <div id="calendar"></div>
+
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="title">Race Info</div>
+      <button data-close-button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+        <p>Race name: <span id="race-name"></span> </p>
+        <p>Date: <span id="race-date"></span> </p>
+    </div>
+  </div>
 
   <script>
 
@@ -33,8 +47,16 @@
           {% endif %}
 
           {% endfor %}
-          ]
-        });
+          ],
+
+      eventClick: function(info) {
+          openModal(modal, info.event.title, info.event.start.toLocaleString('en-US', { 
+              weekday: 'short', 
+              month: 'long', 
+              day: 'numeric', 
+              year: 'numeric' 
+            }).replace(',',''));
+          }});
       
 
       calendar.render();
