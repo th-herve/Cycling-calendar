@@ -18,11 +18,13 @@ closeModalButtons.forEach(button => {
 })
 
 
-function openModal(modal, raceName, raceDate) {
-  if (modal == null) return;
-  document.getElementById('race-name').innerHTML= raceName;
-  document.getElementById('race-date').innerHTML= raceDate;
-  modal.classList.add('active');
+function openModal(modal, raceName, raceDate, raceData) {
+    if (modal == null) return;
+    document.getElementById('race-name').innerHTML= raceName;
+    document.getElementById('race-date').innerHTML= raceDate;
+    console.log(raceData.distance);
+    modal.classList.add('active');
+  
 }
 
 
