@@ -1,5 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto:wght@400;500;700&display=swap');
+
 *, *::after, *::before {
   box-sizing: border-box;
+}
+
+@font-face {
+    font-family: Nike;
+    src: url('/static/font/NIKE.ttf');
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Montserrat, Roboto;
+}
+
+h1 {
+    font-family: Nike;
+    font-size: 3vw;
+    text-decoration: underline red;
+    
+    position: absolute;
+    color: white;
+    padding-left: 1vw;
+}
+
+.header-container {
+    max-width: 100%;
+    min-height: 50px;
+    height: 15vh;
+    overflow: hidden;
+}
+
+#header-image {
+    max-width: 100%;
+    height: auto;
+    /* object-fit: none; */
+    /* position: relative; */
 }
 
 .modal {
@@ -45,4 +82,19 @@
 .modal-body {
   padding: 10px 15px;
 }
+
+.calendar-container {
+    padding: 10px 20px;
+    height: 80vh ;
+}
+
+
+#calendar {
+    /* top: 50%; */
+    /* transform: translateY(-50%); */
+
+}
+
+
+
 

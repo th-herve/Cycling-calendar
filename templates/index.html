@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block main %}
-
-<button data-modal-target="#modal">Open Modal</button>
-
-<div id="calendar"></div>
+  <div class="calendar-container">
+    <div id="calendar"></div>
+    <!-- <p>test</p> -->
+  </div>
 
   <div class="modal" id="modal">
     <div class="modal-header">
@@ -16,17 +16,29 @@
       <button data-close-button class="close-button">&times;</button>
     </div>
     <div class="modal-body">
-        <p>Race name: <span id="race-name"></span> </p>
-        <p>Date: <span id="race-date"></span> </p>
-        <span id="race-distance"></span>
+        <p id="race-name"></p>
+        <p id="race-date"></p>
+        <p id="race-distance"></p>
+        <p id="race-departure-city"></p>
+        <p id="race-arrival-city"></p>
+        <p id="race-classification"></p>
+        
     </div>
   </div>
 
   <script>
 
+      function getRaceData(eventId) {
+        return fetch(`/race_data/${eventId}`)
+        .then(response => response.json());
+        }
+
       let calendarEl = document.getElementById("calendar");
 
       let calendar = new FullCalendar.Calendar(calendarEl, {
+
+        height: '100%',
+
         events: [
           {% for event in events %}
             {
@@ -51,16 +63,15 @@
           ],
 
       eventClick: function(info) {
+          var eventId = info.event.id;
+          getRaceData(eventId).then(data=>{
           openModal(modal, info.event.title, info.event.start.toLocaleString('en-US', { 
               weekday: 'short', 
               month: 'long', 
               day: 'numeric', 
-              year: 'numeric'}).replace(',',''),
+              year: 'numeric'}).replace(',',''), data);
 
-              {{ retrive_race_data("sr:stage:1052033")|safe }}
-              
-
-          );
+              });
           }});
       
 

@@ -18,17 +18,22 @@ closeModalButtons.forEach(button => {
 })
 
 
-function openModal(modal, raceName, raceDate, raceData) {
+function openModal(modal, raceName, raceDate, raceInfo) {
     if (modal == null) return;
-    document.getElementById('race-name').innerHTML= raceName;
-    document.getElementById('race-date').innerHTML= raceDate;
-    console.log(raceData.distance);
+    document.getElementById('race-name').innerHTML= 'Race: ' + raceName;
+    document.getElementById('race-date').innerHTML= 'Date: ' + raceDate;
+    document.getElementById('race-distance').innerHTML= 'Distance: ' + raceInfo.distance + 'km';
+    document.getElementById('race-departure-city').innerHTML= 'Departure city: ' + raceInfo.departure_city;
+    document.getElementById('race-arrival-city').innerHTML= 'Arrival city: ' + raceInfo.arrival_city;
+    document.getElementById('race-classification').innerHTML= 'Classification: ' + raceInfo.classification;
+
+
+
     modal.classList.add('active');
-  
 }
 
 
-function closeModal(modal) {
+function closeModal(modal) { 
   if (modal == null) return;
   modal.classList.remove('active');
 }

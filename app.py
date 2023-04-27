@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request, url_for
 import requests
 from dotenv import load_dotenv
 import os
+import json
 
 from api import fetch_season_data, retrive_race_data
 
@@ -24,5 +25,11 @@ events = fetch_season_data(MEN_2023_SEASON_ID, api_key)
 
 @app.route('/')
 def home():
-    return render_template("index.html", events=events, retrive_race_data=retrive_race_data)
+    return render_template("index.html", events=events)
 
+@app.route('/race_data/<stage_id>')
+def race_data(stage_id):
+    data = retrive_race_data(stage_id)
+    return data
+
+# app.run(debug=True)
