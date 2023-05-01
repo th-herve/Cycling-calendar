@@ -5,7 +5,7 @@ from google.oauth2 import credentials
 from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
 
-from api import fetch_season_data, get_season_info, add_event_user_calendar
+from api import fetch_season_data, get_season_info, add_event_user_calendar, retrive_race_data
 
 app = Flask("Cycling calendar")
 
@@ -49,10 +49,13 @@ def home():
 
         
         add_event_user_calendar(credentials)
-        
+    return render_template("index.html", events=events, retrive_race_data=retrive_race_data)
 
-    return render_template("index.html", events=events)
 
+@app.route('/race_data/<stage_id>')
+def race_data(stage_id):
+    data = retrive_race_data(stage_id)
+    return data
 
 
 @app.route('/authorize')
@@ -62,6 +65,7 @@ def authorize():
                         include_granted_scopes='true')
 
     return redirect(auth_uri)
+
 
 
 if __name__ == "__main__":

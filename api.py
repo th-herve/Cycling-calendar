@@ -201,7 +201,7 @@ def format_race_info(race_json):
                      }
 
 # find if a given stage is in the json database, if not create an entry by making an api request
-def retrive_race_data(stage_id):
+def retrive_race_data(stage_id, update=False):
     # all stage cache file should follow this naming convention 
     json_stages_file = "data/json_stages/stages.json"
 
@@ -221,18 +221,21 @@ def retrive_race_data(stage_id):
             requested_stage_info = None
     
     # if the stage is not in the file, an api request is made and the file is updated with the new data
-    if requested_stage_info == None:
+    if requested_stage_info == None or update == True:
         print("api request for stage")
         stage_info = get_race_info(stage_id)
 
         json_stages_data[stage_id] = {
-                "description": stage_info["stage"]["description"],
-                "scheduled": stage_info["stage"]["scheduled"],
-                "distance": stage_info["stage"]["distance"],
-                "departure_city": stage_info["stage"]["departure_city"],
-                "arrival_city": stage_info["stage"]["arrival_city"],
+                "description": stage_info["stage"].get("description", "Undefined"), 
+                "scheduled": stage_info["stage"].get("scheduled", "Undefined"), 
+                "distance": stage_info["stage"].get("distance", "Undefined"), 
+                "departure_city": stage_info["stage"].get("departure_city", "Undefined"), 
+                "arrival_city": stage_info["stage"].get("arrival_city", "Undefined"), 
+                "classification": stage_info["stage"].get("classification", "Undefined"), 
+                "single_event": stage_info["stage"].get("single_event", "Undefined"), 
                 }
-        print(json_stages_data)
+        requested_stage_info = json_stages_data[stage_id]
+
         with open(json_stages_file, 'w') as file:
             json.dump(json_stages_data, file)
         
