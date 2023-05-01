@@ -5,6 +5,8 @@ import os
 from requests import post, get
 import json
 from datetime import datetime
+from google_auth_oauthlib.flow import Flow
+from googleapiclient.discovery import build
 
 
 # load the .env file from the dir, wich contain the client id and passwrd to request the token
@@ -147,6 +149,24 @@ def format_dateTime_to_time(date_time):
 
     return date_only_str
 
+
+def add_event_user_calendar(credentials):
+
+    service = build('calendar','v3',credentials=credentials)
+
+    events_to_add = {
+            'summary':'Paris Roubais',
+             'start': {
+                'dateTime': '2023-05-01T10:00:00-07:00',
+                'timeZone': 'Europe/Paris',
+                },
+            'end': {
+                'dateTime': '2023-05-01T12:00:00-07:00',
+                'timeZone': 'Europe/Paris',
+                },
+            }
+
+    service.events().insert(calendarId='primary', body=events_to_add).execute()
 
 
 # season_2023 = get_season_info(language_code,MEN_2023_SEASON_ID,api_key)
