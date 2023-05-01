@@ -239,19 +239,7 @@ def retrive_race_data(stage_id):
 
     return requested_stage_info
 
-
-
-# ╔═════════ Other ═════════╗
-
-# take a datetime format and convert it to just date
-def format_dateTime_to_time(date_time):
-    date_time_object = datetime.fromisoformat(date_time) 
-
-    date_only = date_time_object.date()
-    date_only_str = date_only.isoformat()
-
-    return date_only_str
-
+# ╔═════════ Google functionality ═════════╗
 
 def add_event_user_calendar(credentials):
 
@@ -270,6 +258,20 @@ def add_event_user_calendar(credentials):
             }
 
     service.events().insert(calendarId='primary', body=events_to_add).execute()
+
+
+# ╔═════════ Other ═════════╗
+
+# take a datetime format and convert it to just date
+def format_dateTime_to_time(date_time):
+    date_time_object = datetime.fromisoformat(date_time) 
+
+    date_only = date_time_object.date()
+    date_only_str = date_only.isoformat()
+
+    return date_only_str
+
+
 
 
 # season_2023 = get_season_info(language_code,MEN_2023_SEASON_ID,api_key)
