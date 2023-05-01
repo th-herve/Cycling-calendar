@@ -89,12 +89,58 @@ h1 {
 }
 
 
-#calendar {
-    /* top: 50%; */
-    /* transform: translateY(-50%); */
-
+footer {
+    position: absolute;
+    bottom: 0px;
+    margin-left: 70vw;
 }
 
+footer button {
+  background: transparent;
+  position: relative;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid #4c8bf5;
+  border-radius: 25px;
+  outline: none;
+  overflow: hidden;
+  color: #4c8bf5;
+  transition: color 0.3s 0.1s ease-out;
+  text-align: center;
+
+  height: 5vh;
+}
+
+footer button span {
+  margin: 10px;
+}
+
+footer button img {
+    max-height: 30px;
+    height: auto;
+}
+
+@media screen and (max-width: 700px) {
+    footer {
+        margin-left: 70vw;
+    }
+    footer button {
+        color: white;
+        width: 60px;
+    }
+        
+  }
 
 
+a:link { text-decoration: none; }
 
+a:visited { text-decoration: none; }
+
+a:hover { text-decoration: none; }
+
+a:active { text-decoration: none; }

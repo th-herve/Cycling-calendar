@@ -4,7 +4,6 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
       <link rel="stylesheet" href="static/styles.css">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.4.0/main.min.css">
       <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.4.0/main.min.js"></script>
@@ -16,14 +15,26 @@
     <header>
       <div class="header-container">
         <h1>Cycling Calendar</h1>
-        <a href="/authorize">google</a>
+        <!-- <a href="/authorize">google</a> -->
+
         <img id="header-image" src="/static/Images/header.png" alt="cycling-header">
+
       </div>
     </header>
 
     <main>
       {% block main %}{% endblock %}
     </main>
+
+  <footer>
+    <a href="/authorize">
+      <button>
+        <img class="image" src="https://developers.google.com/identity/images/g-logo.png">
+        <span>Add races to your calendar</span>
+      </button>
+    </a>
+  </footer>
+
 
   </body>
 </html>
