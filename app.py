@@ -12,7 +12,10 @@ app = Flask("Cycling calendar")
 # load the .env file from the dir, wich contain the client id and passwrd to request the token
 load_dotenv()
 
-# import the key from the .env file 
+
+app = Flask("Cycling calendar")
+
+# import the sport radar key from the .env file 
 api_key = os.getenv("api_key")
 app.secret_key = os.getenv("APP_SECRET_KEY")
 

@@ -18,6 +18,7 @@
     <div class="modal-body">
         <p>Race name: <span id="race-name"></span> </p>
         <p>Date: <span id="race-date"></span> </p>
+        <span id="race-distance"></span>
     </div>
   </div>
 
@@ -54,8 +55,12 @@
               weekday: 'short', 
               month: 'long', 
               day: 'numeric', 
-              year: 'numeric' 
-            }).replace(',',''));
+              year: 'numeric'}).replace(',',''),
+
+              {{ retrive_race_data("sr:stage:1052033")|safe }}
+              
+
+          );
           }});
       
 
