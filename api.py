@@ -7,6 +7,8 @@ import json
 from datetime import datetime
 from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
+from googleapiclient.http import BatchHttpRequest
+from googleapiclient.errors import HttpError
 
 
 # load the .env file from the dir, wich contain the client id and passwrd to request the token
@@ -113,12 +115,17 @@ def format_season_info(season):
                     stage_description =  stage["description"]
                     stage_date = format_dateTime_to_time(stage["scheduled"]) 
 
+                    # special color are apply for the giro, tour de france, and vuelta (the ifs statement are in this order)
                     stage_detail = {
                             "id" : stage_id, 
                             "title": description +" "+ stage_description, 
                             "date" : stage_date,
+                            "backgroundColor" : "#ED6F92" if id == "sr:stage:1052217" else ("#e8c713" if id == "sr:stage:1023895" else ( "#ff0000" if id == "sr:stage:1052491" else "green")) 
                             }
+
                     race_detail["stages"].append(stage_detail)
+
+
             # some races do not have stages entry even though they should (problem from the api provider)
             except:
                 print(f"no stages detail for {description}")
@@ -244,23 +251,44 @@ def retrive_race_data(stage_id, update=False):
 
 # ╔═════════ Google functionality ═════════╗
 
+# add all races to the user calendar
 def add_event_user_calendar(credentials):
 
     service = build('calendar','v3',credentials=credentials)
 
-    events_to_add = {
-            'summary':'Paris Roubais',
-             'start': {
-                'dateTime': '2023-05-01T10:00:00-07:00',
-                'timeZone': 'Europe/Paris',
-                },
-            'end': {
-                'dateTime': '2023-05-01T12:00:00-07:00',
-                'timeZone': 'Europe/Paris',
-                },
-            }
+    # get the season races
+    season_data = fetch_season_data(MEN_2023_SEASON_ID)
 
-    service.events().insert(calendarId='primary', body=events_to_add).execute()
+
+    for race in season_data:
+        if race["single_event"]:
+            race_info = {
+                    'summary': race["title"],
+                    'start': { 'date': race["date"] },
+                    'end': { 'date': race["date"] },
+                    } 
+            try:
+                service.events().insert(calendarId='primary', body=race_info).execute()
+                print(f"added {race['title']}")
+            except:
+                print(f"failed to add {race['title']}")
+
+        else:
+            # special color are apply for the giro, tour de france, and vuelta (the ifs statement are in this order)
+            id = race['id']
+            for stage in race["stages"]:
+                stage_info = {
+                    'summary': stage["title"],
+                    'start': { 'date': stage["date"] },
+                    'end': { 'date': stage["date"] },
+                    "colorId" : 4 if id == "sr:stage:1052217" else (5 if id == "sr:stage:1023895" else ( 11 if id == "sr:stage:1052491" else 10)),
+                    } 
+                try:
+                    service.events().insert(calendarId='primary', body=stage_info).execute()
+                    print(f"added {stage['title']}")
+                except:
+                    print(f"failed to add {stage['title']}")
+
 
 
 # ╔═════════ Other ═════════╗
