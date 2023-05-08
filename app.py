@@ -4,8 +4,11 @@ import os
 from google.oauth2 import credentials
 from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
+import threading
 
-from api import fetch_season_data, get_season_info, add_event_user_calendar, retrive_race_data
+from api import fetch_season_data, add_event_user_calendar, retrive_race_data, format_season_info
+
+
 
 app = Flask("Cycling calendar")
 
@@ -27,7 +30,8 @@ language_code = "en"
 
 MEN_2023_SEASON_ID = "sr:stage:1023889"
 
-events = fetch_season_data(MEN_2023_SEASON_ID, api_key)
+events = fetch_season_data(MEN_2023_SEASON_ID)
+events = format_season_info(events)
 
 # google set up
 flow = Flow.from_client_secrets_file(
@@ -35,8 +39,6 @@ flow = Flow.from_client_secrets_file(
         scopes=['openid',  'https://www.googleapis.com/auth/calendar.events'],)
 
 flow.redirect_uri = 'https://127.0.0.1:5000'
-
-print(flow)
 
 @app.route('/')
 def home():
@@ -46,10 +48,13 @@ def home():
         flow.fetch_token(authorization_response=authorization_response)
 
         credentials = flow.credentials
-
         
-        add_event_user_calendar(credentials)
-    return render_template("index.html", events=events, retrive_race_data=retrive_race_data)
+        # add the event to the user's calendar in a separate thread so it does not interrupt the program
+        adding_event_thread = threading.Thread(target=add_event_user_calendar, args=(credentials, events))
+        adding_event_thread.start()
+
+
+    return render_template("index.html", events=events, retrive_race_data=retrive_race_data);
 
 
 @app.route('/race_data/<stage_id>')

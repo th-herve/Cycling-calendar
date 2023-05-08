@@ -96,6 +96,7 @@ footer {
 }
 
 footer button {
+  min-height: 30px;
   background: transparent;
   position: relative;
   padding: 5px 15px;
@@ -116,6 +117,7 @@ footer button {
   height: 5vh;
 }
 
+
 footer button span {
   margin: 10px;
 }
@@ -123,16 +125,25 @@ footer button span {
 footer button img {
     max-height: 30px;
     height: auto;
+
 }
+
 
 @media screen and (max-width: 700px) {
     footer {
         margin-left: 70vw;
     }
+
     footer button {
         color: white;
         width: 60px;
     }
+    
+
+    .fc {
+        font-size: 3vw;
+    }
+
         
   }
 
@@ -144,3 +155,11 @@ a:visited { text-decoration: none; }
 a:hover { text-decoration: none; }
 
 a:active { text-decoration: none; }
+
+/* .fc .fc-toolbar-title { */
+/*   font-size: 1.75vw; */
+/*   margin: 0; */
+/* } */
+.fc {
+  font-size: 1vw;
+}
