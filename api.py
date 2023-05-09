@@ -44,12 +44,11 @@ def fetch_season_data(event_id, year = "2023", language_code = "en", update: boo
 
     return event_data
 
-# take a season as arg and return a list of dict with each race and their info, formated to be use in fullcalendar
+# take a season as arg and return a list of dict with each race and their info
 def format_season_info(season):
     races_info = []
 
     for race in season["stages"][0]["stages"]:
-        # key must be readable by fullcalendar (not really but I think it's better)
         race_detail = {
                     "id" : race["id"], 
                     "title" : race["description"],  # title of the event in calendar
@@ -58,21 +57,20 @@ def format_season_info(season):
                     "single_event" : race["single_event"]
                      }
 
-        # add the stages if not a single event race in a list
+        # add the stages if any
         if not race["single_event"]: 
             id = race["id"];
             try:
                 race_detail["stages"] = []
                 for stage in race["stages"]:
-                    # special color are apply for the giro, tour de france, and vuelta (the ifs statement are in this order)
                     stage_detail = {
                             "id" : stage["id"],
                             "title": race["description"] +" "+ stage["description"], 
                             "date" : format_dateTime_to_time(stage["scheduled"]),
-                            "backgroundColor" : "#ED6F92" if id == "sr:stage:1052217" 
-                                                else ("#e8c713" if id == "sr:stage:1023895" 
-                                                else ( "#ff0000" if id == "sr:stage:1052491" 
-                                                else "green")) 
+                            "backgroundColor" : "#ED6F92" if id == "sr:stage:1052217"           # pink bg for the Giro 
+                                                else ("#e8c713" if id == "sr:stage:1023895"     # yellow bg for the Tour De France
+                                                else ( "#ff0000" if id == "sr:stage:1052491"    # red bg for the Vuelta
+                                                else "green"))                                  
                             }
 
                     race_detail["stages"].append(stage_detail)
@@ -84,7 +82,7 @@ def format_season_info(season):
         
         races_info.append(race_detail)
 
-    # write the content of in a json
+    # write the content in a json
     write_data_in_json("data/formated_season.json", races_info) 
 
     return races_info 
@@ -97,7 +95,6 @@ def format_season_info(season):
 def retrive_race_data(stage_id, update=False):
     stages_cache_file = "data/json_stages/stages.json"
 
-    # open the cache file
     json_stages_data = get_json_data(stages_cache_file)
 
     if stage_id in json_stages_data and not update:
@@ -110,6 +107,7 @@ def retrive_race_data(stage_id, update=False):
 
         return json_stages_data[stage_id]
         
+# add an entry to the stages cache file
 def update_stages_cache_json(stages_cache_file, json_stages_data, stage_info, stage_id):
     json_stages_data[stage_id] = {
             "description": stage_info["stage"].get("description", "Undefined"), 
@@ -215,5 +213,5 @@ def write_data_in_json(json_file, data):
         json.dump(data, file)
 
 
-events = fetch_season_data(MEN_2023_SEASON_ID, api_key)
-data = format_season_info(events)
+# events = fetch_season_data(MEN_2023_SEASON_ID, api_key)
+# data = format_season_info(events)
