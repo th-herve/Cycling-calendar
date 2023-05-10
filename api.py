@@ -1,9 +1,10 @@
-from dotenv import load_dotenv
-import os
-from requests import get
-import json
 from datetime import datetime
+import json
+import os
+
+from dotenv import load_dotenv
 from googleapiclient.discovery import build
+from requests import get
 
 load_dotenv()
 api_key = os.getenv("api_key")
@@ -157,36 +158,35 @@ def add_event_user_calendar(credentials, season_data):
 
     for race in season_data:
         if race["single_event"]:
-            race_info = {
-                    'summary': race["title"],
-                    'start': { 'date': race["date"] },
-                    'end': { 'date': race["date"] },
-                    } 
+            race_event = create_race_event(race)
             try:
-                service.events().insert(calendarId='primary', body=race_info).execute()
+                service.events().insert(calendarId='primary', body=race_event).execute()
+                
                 print(f"added {race['title']}")
             except:
                 print(f"failed to add {race['title']}")
 
         else:
-            # special color are apply for the giro, tour de france, and vuelta (the if statements are in this order)
-            id = race['id']
             for stage in race["stages"]:
-                stage_info = {
-                    'summary': stage["title"],
-                    'start': { 'date': stage["date"] },
-                    'end': { 'date': stage["date"] },
-                    "colorId" : 4 if id == "sr:stage:1052217" 
-                                else (5 if id == "sr:stage:1023895" 
-                                else ( 11 if id == "sr:stage:1052491" 
-                                else 10)),
-                    } 
+                stage_event = create_race_event(stage, race["id"])
                 try:
-                    service.events().insert(calendarId='primary', body=stage_info).execute()
-                    # print(f"added {stage['title']}")
+                    service.events().insert(calendarId='primary', body=stage_event).execute()
                 except:
                     print(f"failed to add {stage['title']}")
 
+def create_race_event(race, id=''):
+    race_event = {
+        'summary': race["title"],
+        'start': { 'date': race["date"] },
+        'end': { 'date': race["date"] },
+        "colorId" : 4 if id == "sr:stage:1052217"           # pink bg giro
+                    else (5 if id == "sr:stage:1023895"     # yellow bg TDF
+                    else ( 11 if id == "sr:stage:1052491"   #red bg vuelta
+                    else 10)),
+        } 
+
+    return race_event
+        
 
 # ╔═══════════════════════════════╗
 # ║           Utilities           ║
@@ -212,6 +212,7 @@ def write_data_in_json(json_file, data):
     with open(json_file, 'w') as file:
         json.dump(data, file)
 
+if __name__ == "__main__":
+    print('my name equal main')
 
-# events = fetch_season_data(MEN_2023_SEASON_ID, api_key)
-# data = format_season_info(events)
+

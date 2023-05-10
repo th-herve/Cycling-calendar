@@ -1,37 +1,19 @@
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request
 from dotenv import load_dotenv
 import os
-from google.oauth2 import credentials
 from google_auth_oauthlib.flow import Flow
-from googleapiclient.discovery import build
 import threading
 
 from api import fetch_season_data, add_event_user_calendar, retrive_race_data, format_season_info
 
 
-
 app = Flask("Cycling calendar")
 
-# load the .env file from the dir, wich contain the client id and passwrd to request the token
+# .env loading
 load_dotenv()
-
-
-app = Flask("Cycling calendar")
-
-# import the sport radar key from the .env file 
-api_key = os.getenv("api_key")
 app.secret_key = os.getenv("APP_SECRET_KEY")
-
 GOOGLE_ID = os.getenv("GOOGLE_ID")
 GOOGLE_SECRET = os.getenv("GOOGLE_SECRET")
-
-# set the language_code TODO: set language selection
-language_code = "en"
-
-MEN_2023_SEASON_ID = "sr:stage:1023889"
-
-events = fetch_season_data(MEN_2023_SEASON_ID)
-events = format_season_info(events)
 
 # google set up
 flow = Flow.from_client_secrets_file(
@@ -39,6 +21,14 @@ flow = Flow.from_client_secrets_file(
         scopes=['openid',  'https://www.googleapis.com/auth/calendar.events'],)
 
 flow.redirect_uri = 'https://127.0.0.1:5000'
+
+
+# set the language_code TODO: set language selection
+language_code = "en"
+
+MEN_2023_SEASON_ID = "sr:stage:1023889"
+events = fetch_season_data(MEN_2023_SEASON_ID)
+events = format_season_info(events)
 
 @app.route('/')
 def home():
@@ -65,7 +55,6 @@ def race_data(stage_id):
 
 @app.route('/authorize')
 def authorize():
-    
     auth_uri, state = flow.authorization_url(access_type='offline', 
                         include_granted_scopes='true')
 
