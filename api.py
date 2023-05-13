@@ -215,4 +215,3 @@ def write_data_in_json(json_file, data):
 if __name__ == "__main__":
     print('my name equal main')
 
-
