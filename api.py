@@ -181,12 +181,12 @@ def create_race_event(race, id=''):
         'end': { 'date': race["date"] },
         "colorId" : 4 if id == "sr:stage:1052217"           # pink bg giro
                     else (5 if id == "sr:stage:1023895"     # yellow bg TDF
-                    else ( 11 if id == "sr:stage:1052491"   #red bg vuelta
+                    else ( 11 if id == "sr:stage:1052491"   # red bg vuelta
                     else 10)),
         } 
 
     return race_event
-        
+
 
 # ╔═══════════════════════════════╗
 # ║           Utilities           ║
