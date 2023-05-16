@@ -63,4 +63,4 @@ def authorize():
 
 
 if __name__ == "__main__":
-    app.run(ssl_context='adhoc')
+    app.run(debug=False, ssl_context='adhoc')

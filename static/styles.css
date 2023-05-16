@@ -4,37 +4,90 @@
   box-sizing: border-box;
 }
 
+:root {
+  --background: #000000;
+  --surface-l1: #181818;
+  --surface-l2: #3b3b3b;
+  --surface-l3: #474747;
+
+  --foreground-l1: #DCDCDC;
+
+  --accent-blue-900: #102A43;
+  --accent-blue-800: #243B53;
+  --accent-blue-500: #627D98;
+  --accent-blue-100: #D9E2EC;
+
+  --fc-button-bg-color: var(--surface-l2); 
+  --fc-button-border-color: var(--fc-border-color);
+  --fc-button-text-color: var(--foreground-l1);
+
+  --fc-border-color: var(--surface-l1);
+
+  /* --fc-today-bg-color: rgba(67, 253, 255, 0.1); */
+  --fc-today-bg-color: var(--surface-l2);
+}
+
 @font-face {
     font-family: Nike;
     src: url('/static/font/NIKE.ttf');
 }
 
+
+
 html, body {
     height: 100%;
     margin: 0;
     font-family: Montserrat, Roboto;
-}
-
-h1 {
-    font-family: Nike;
-    font-size: 3vw;
-    text-decoration: underline red;
-    
-    position: absolute;
-    color: white;
-    padding-left: 1vw;
+    color: var(--foreground-l1);
+    background-color: var(--background);
+    overflow: hidden;
 }
 
 .header-container {
     max-width: 100%;
-    min-height: 50px;
-    height: 15vh;
+    min-height: 40px;
+    height: 10vh;
     overflow: hidden;
+    background-color: var(--surface-l1);
+    display: flex;
+    align-items: center;
 }
 
+.header-container h1 {
+    font-family: Nike;
+    font-size: 2vw;
+    text-decoration: underline red;
+    
+    /* position: absolute; */
+    color: var(--foreground-l1);
+    padding-left: 1vw;
+}
+
+.header-container .google-logo-container {
+  /* background-color: var(--surface-l2); */
+  height: 4em;
+  margin-left: auto;
+  margin-right: 50px;
+  border-radius: 10px;
+  padding: 2px 2px 2px 2px;
+  overflow: hidden;
+
+}
+
+.header-container .google-logo-container img{
+  height: 100%;
+}
+
+
+.header-container .google-logo-container :hover{
+  background-color: var(--surface-l3);
+
+}
+
+
 #header-image {
-    max-width: 100%;
-    height: auto;
+    /* max-width: 100%; */
+    /* height: auto; */
     /* object-fit: none; */
     /* position: relative; */
 }
@@ -45,12 +98,13 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
-  border: 1px solid black;
-  border-radius: 10px;
+  /* border: 1px solid black; */
+  border-radius: 20px;
   z-index: 10;
-  background-color: white;
+  background-color: var(--surface-l3);
   width: 500px;
   max-width: 80%;
+  color: white;
 }
 
 .modal.active {
@@ -77,16 +131,44 @@ h1 {
   background: none;
   font-size: 1.25rem;
   font-weight: bold;
+  color: white;
 }
 
 .modal-body {
   padding: 10px 15px;
 }
 
+
 .calendar-container {
+    margin-top: 4vh;
     padding: 10px 20px;
+    margin-left: 20px;
+    margin-right: 20px;
     height: 80vh ;
+    background-color: var(--surface-l1);
+    border-radius: 20px;
 }
+
+.fc {
+  font-size: 1vw;
+}
+
+
+.fc, .fc *, .fc ::after, .fc ::before {
+  padding-left: 0.08vw;
+  padding-right: 0.08vw;
+
+}
+
+.fc-daygrid-day.fc-day-today {
+    /* color: cyan; */
+    /* font-weight: bold; */
+    border-radius: 20px;
+  }
+
+.fc .fc-daygrid-day-number {
+    padding-right: 47%;
+  }
 
 
 footer {
@@ -143,7 +225,14 @@ footer button img {
     .fc {
         font-size: 3vw;
     }
+    .header-container h1 {
+      font-size: 30px;
+      padding-left: 20px;
+    }
 
+    .header-container .google-logo-container {
+      height: 40px;
+    }
         
   }
 
@@ -160,6 +249,3 @@ a:active { text-decoration: none; }
 /*   font-size: 1.75vw; */
 /*   margin: 0; */
 /* } */
-.fc {
-  font-size: 1vw;
-}

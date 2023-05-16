@@ -8,6 +8,9 @@
       <link rel="stylesheet" href="static/styles.css">
       <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.4.0/main.min.js"></script>
       <script defer src="static/js/script.js"></script>
+
+      <script src="https://hammerjs.github.io/dist/hammer.js"></script>
+
       <title>Cycling calendar: {% block title %}{% endblock %}</title>
     </head>
   <body>
@@ -17,8 +20,12 @@
         <h1>Cycling Calendar</h1>
         <!-- <a href="/authorize">google</a> -->
 
-        <img id="header-image" src="/static/Images/header2.png" alt="cycling-header">
-
+        <!-- <img id="header-image" src="/static/Images/header2.png" alt="cycling-header"> -->
+          <div class="google-logo-container">
+            <a href="/authorize">
+            <img src="/static/Images/google_logo.png" alt="google logo">
+            </a>
+          </div>
       </div>
     </header>
     <main>
@@ -26,12 +33,12 @@
     </main>
 
   <footer>
-    <a href="/authorize">
-      <button>
-        <img class="image" src="https://developers.google.com/identity/images/g-logo.png">
-        <span>Add races to your calendar</span>
-      </button>
-    </a>
+   <!-- <a href="/authorize"> -->
+    <!--   <button> -->
+    <!--     <img class="image" src="https://developers.google.com/identity/images/g-logo.png"> -->
+    <!--     <span>Add races to your calendar</span> -->
+    <!--   </button> -->
+    <!-- </a> -->
   </footer>
 
 

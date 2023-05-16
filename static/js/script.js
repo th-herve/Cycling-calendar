@@ -3,6 +3,18 @@ const openModalButtons = document.querySelectorAll('[data-modal-target]');
 const closeModalButtons = document.querySelectorAll('[data-close-button]');
 
 
+var mc = new Hammer(calendarEl);
+
+mc.on('panleft', function() {
+    calendar.next()
+});
+
+
+mc.on('panright', function() {
+    calendar.prev()
+});
+
+
 openModalButtons.forEach(button => {
   button.addEventListener('click', () => {
     const modal = document.querySelector(button.dataset.modalTarget);

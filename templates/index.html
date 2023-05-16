@@ -38,6 +38,7 @@
       let calendar = new FullCalendar.Calendar(calendarEl, {
 
         height: '100%',
+        fixedWeekCount: false,
 
         events: [
           {% for event in events %}
