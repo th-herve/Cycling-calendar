@@ -31,17 +31,29 @@
     </div>
     <div class="modal-body">
       <p>Choose the races you wish to add:</p>
-      <form action="/" method="POST">
+      <form class="google-selection-form" action="/" method="POST">
         <div>
+          <input type="checkbox" id= "select-all-event" name="all-event-selection-checkbox" style="margin-bottom: 10px;">
+          <label for="select-all-event">Select all</label>
 
           {% for event in events %}
             <div>
-              <input type="checkbox" id= "event_{{ event.id }}" name="event_selection_checkbox" value="{{ event.id }}">
+              <input type="checkbox" id= "event_{{ event.id }}" name="event_selection_checkbox" value="{{ event.id }}" class="google-selection-checkbox">
               <label for="event_{{ event.id }}">{{ event.title | safe }}</label>
             </div>
           {% endfor %}
 
-          <button class="btn" type="submit">Add with google</button>
+          <!-- <button class="btn" type="submit">Add with google</button> -->
+
+          <div class="form-button-container">
+            <button type="submit" class="button">
+              <span class="button__text">Add races</span>
+              <span class="button__icon">
+                <img class="button-image" src="/static/Images/google_logo.png" alt="google logo">
+              </span>
+            </button>
+          </div>
+
         </div>
       </form>
     </div>

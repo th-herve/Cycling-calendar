@@ -35,7 +35,6 @@ def home():
 
     if request.method == "POST":
         session['events_user_selected'] = request.form.getlist("event_selection_checkbox")
-        print(session['events_user_selected'])
         return redirect('/authorize')
 
 

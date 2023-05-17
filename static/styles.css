@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto:wght@400;500;700&display=swap');
 
+
+/* =============== */
+/* |   general   | */
+/* =============== */
+
 *, *::after, *::before {
   box-sizing: border-box;
 }
@@ -32,8 +37,6 @@
     src: url('/static/font/NIKE.ttf');
 }
 
-
-
 html, body {
     height: 100%;
     margin: 0;
@@ -42,6 +45,11 @@ html, body {
     background-color: var(--background);
     overflow: hidden;
 }
+
+
+/* =============== */
+/* |    header   | */
+/* =============== */
 
 .header-container {
     max-width: 100%;
@@ -78,19 +86,15 @@ html, body {
   height: 100%;
 }
 
-
 .header-container .google-logo-container :hover{
   background-color: var(--surface-l3);
 
 }
 
 
-#header-image {
-    /* max-width: 100%; */
-    /* height: auto; */
-    /* object-fit: none; */
-    /* position: relative; */
-}
+/* =============== */
+/* |    modal    | */
+/* =============== */
 
 .modal {
   position: fixed;
@@ -106,7 +110,6 @@ html, body {
   max-width: 80%;
   color: white;
 }
-
 
 .modal.active {
   transform: translate(-50%, -50%) scale(1);
@@ -140,6 +143,10 @@ html, body {
 }
 
 
+/* =============== */
+/* |   calendar    | */
+/* =============== */
+
 .calendar-container {
     margin-top: 4vh;
     padding: 10px 20px;
@@ -153,7 +160,6 @@ html, body {
 .fc {
   font-size: 1vw;
 }
-
 
 .fc, .fc *, .fc ::after, .fc ::before {
   padding-left: 0.08vw;
@@ -171,6 +177,10 @@ html, body {
     padding-right: 47%;
   }
 
+  
+/* =============== */
+/* |   footer    | */
+/* =============== */
 
 footer {
     position: absolute;
@@ -200,7 +210,6 @@ footer button {
   height: 5vh;
 }
 
-
 footer button span {
   margin: 10px;
 }
@@ -208,9 +217,12 @@ footer button span {
 footer button img {
     max-height: 30px;
     height: auto;
-
 }
 
+
+/* =============== */
+/* |    media    | */
+/* =============== */
 
 @media screen and (max-width: 700px) {
     footer {
@@ -238,15 +250,92 @@ footer button img {
   }
 
 
+/* =============== */
+/* |     form    | */
+/* =============== */
+
+.google-selection-form {
+  padding: 15px;
+  }
+
+.form-button-container {
+  display: flex;
+  justify-content: center;
+  }
+
+
+
+.button {
+  margin-top: 20px;
+  position:relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  /* border: 1px solid #4285F4; */
+  border: none;
+  border-radius: 5px;
+  background-color: #4285F4;
+  overflow: hidden;
+}
+
+.button, .button__icon, .button__text {
+  transition: all 0.3s;
+}
+
+.button .button__text {
+  transform: translateX(30px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.button .button__icon {
+  position: absolute;
+  transform: translateX(109px);
+  height: 110%;
+  width: 39px;
+  background-color: #1d64d8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-image {
+  width: 40px;
+  stroke: #fff;
+}
+
+.button:hover {
+  background: #1d64d8;
+}
+
+.button:hover .button__text {
+  color: transparent;
+}
+
+.button:hover .button__icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.button:active .button__icon {
+  background-color: #4285F4;
+}
+
+.button:active {
+  border: 1px solid #4285F4;
+}
+
+
+/* =============== */
+/* |    other    | */
+/* =============== */
+
 a:link { text-decoration: none; }
 
 a:visited { text-decoration: none; }
 
-a:hover { text-decoration: none; }
+/* a:hover { text-decoration: none; } */
 
 a:active { text-decoration: none; }
-
-/* .fc .fc-toolbar-title { */
-/*   font-size: 1.75vw; */
-/*   margin: 0; */
-/* } */

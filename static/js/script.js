@@ -2,8 +2,24 @@
 
 // const openModalButtons = document.querySelectorAll('[data-modal-target]');
 const closeModalButtons = document.querySelectorAll('[data-close-button]');
-
 const googleModal = document.getElementById('google-modal');
+
+const selectAllEventCheckbox = document.getElementById('select-all-event')
+var checkboxes = document.getElementsByName('event_selection_checkbox');
+
+
+selectAllEventCheckbox.addEventListener('click', function() {
+    if (selectAllEventCheckbox.checked == true) {
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = true;
+    })}
+    else {
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = false;
+        })
+    }
+
+});
 
 var mc = new Hammer(calendarEl);
 

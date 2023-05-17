@@ -86,7 +86,7 @@ def format_season_info(season):
     # write the content in a json
     write_data_in_json("data/formated_season.json", races_info) 
 
-    return races_info 
+    return sorted(races_info, key=lambda x: x['title']) 
 
 # ╔═══════════════════════════════╗
 # ║          Race info            ║
@@ -158,7 +158,7 @@ def add_event_user_calendar(credentials, season_data, events_user_selected):
 
     for race in season_data:
         if race['id'] in events_user_selected:
-            if race["single_event"]:
+            if race["single_event"] or not race['stages']:
                 race_event = create_race_event(race)
                 try:
                     service.events().insert(calendarId='primary', body=race_event).execute()
@@ -214,5 +214,8 @@ def write_data_in_json(json_file, data):
         json.dump(data, file)
 
 if __name__ == "__main__":
-    print('my name equal main')
+    data = fetch_season_data(MEN_2023_SEASON_ID)
+    data = format_season_info(data)
+    sorted_race = sorted(data, key=lambda x: x['title'])
+    print(sorted_race)
 
