@@ -153,26 +153,27 @@ def event_api_request(event_id, event_type, api_key = api_key, year = "2023", la
 # ╚═══════════════════════════════╝
 
 # add all races to the user calendar
-def add_event_user_calendar(credentials, season_data):
+def add_event_user_calendar(credentials, season_data, events_user_selected):
     service = build('calendar','v3',credentials=credentials)
 
     for race in season_data:
-        if race["single_event"]:
-            race_event = create_race_event(race)
-            try:
-                service.events().insert(calendarId='primary', body=race_event).execute()
-                
-                print(f"added {race['title']}")
-            except:
-                print(f"failed to add {race['title']}")
-
-        else:
-            for stage in race["stages"]:
-                stage_event = create_race_event(stage, race["id"])
+        if race['id'] in events_user_selected:
+            if race["single_event"]:
+                race_event = create_race_event(race)
                 try:
-                    service.events().insert(calendarId='primary', body=stage_event).execute()
+                    service.events().insert(calendarId='primary', body=race_event).execute()
+                    
+                    print(f"added {race['title']}")
                 except:
-                    print(f"failed to add {stage['title']}")
+                    print(f"failed to add {race['title']}")
+
+            else:
+                for stage in race["stages"]:
+                    stage_event = create_race_event(stage, race["id"])
+                    try:
+                        service.events().insert(calendarId='primary', body=stage_event).execute()
+                    except:
+                        print(f"failed to add {stage['title']}")
 
 def create_race_event(race, id=''):
     race_event = {

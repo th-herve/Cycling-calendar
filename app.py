@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, session
 from dotenv import load_dotenv
 import os
 from google_auth_oauthlib.flow import Flow
@@ -30,17 +30,26 @@ MEN_2023_SEASON_ID = "sr:stage:1023889"
 events = fetch_season_data(MEN_2023_SEASON_ID)
 events = format_season_info(events)
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def home():
+
+    if request.method == "POST":
+        session['events_user_selected'] = request.form.getlist("event_selection_checkbox")
+        print(session['events_user_selected'])
+        return redirect('/authorize')
+
+
+
     # if there is a response from google, add info to user calendar
     if 'code' in request.args:
+        events_user_selected = session['events_user_selected']
         authorization_response = request.url
         flow.fetch_token(authorization_response=authorization_response)
 
         credentials = flow.credentials
         
         # add the event to the user's calendar in a separate thread so it does not interrupt the program
-        adding_event_thread = threading.Thread(target=add_event_user_calendar, args=(credentials, events))
+        adding_event_thread = threading.Thread(target=add_event_user_calendar, args=(credentials, events, events_user_selected))
         adding_event_thread.start()
 
 

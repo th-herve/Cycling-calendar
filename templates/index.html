@@ -8,25 +8,47 @@
   <div class="calendar-container">
     <div id="calendar"></div>
   </div>
-  
+
   <div class="modal" id="modal">
     <div class="modal-header">
       <div class="title">Race Info</div>
       <button data-close-button class="close-button">&times;</button>
     </div>
     <div class="modal-body">
-        <p id="race-name"></p>
-        <p id="race-date"></p>
-        <p id="race-distance"></p>
-        <p id="race-departure-city"></p>
-        <p id="race-arrival-city"></p>
-        <p id="race-classification"></p>
-          
-        
+      <p id="race-name"></p>
+      <p id="race-date"></p>
+      <p id="race-distance"></p>
+      <p id="race-departure-city"></p>
+      <p id="race-arrival-city"></p>
+      <p id="race-classification"></p>
     </div>
   </div>
 
-  <script>
+  <div class="modal" id="google-modal">
+    <div class="modal-header">
+      <div class="title">Add races to your google calendar</div>
+      <button data-close-button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p>Choose the races you wish to add:</p>
+      <form action="/" method="POST">
+        <div>
+
+          {% for event in events %}
+            <div>
+              <input type="checkbox" id= "event_{{ event.id }}" name="event_selection_checkbox" value="{{ event.id }}">
+              <label for="event_{{ event.id }}">{{ event.title | safe }}</label>
+            </div>
+          {% endfor %}
+
+          <button class="btn" type="submit">Add with google</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+<script>
 
       function getRaceData(eventId) {
         return fetch(`/race_data/${eventId}`)

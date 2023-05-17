@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.4.0/main.min.css">
-      <link rel="stylesheet" href="static/styles.css">
-      <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.4.0/main.min.js"></script>
-      <script defer src="static/js/script.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.4.0/main.min.css">
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.4.0/main.min.js"></script>
+    <script defer src="static/js/script.js"></script>
 
-      <script src="https://hammerjs.github.io/dist/hammer.js"></script>
+    <script src="https://hammerjs.github.io/dist/hammer.js"></script>
 
-      <title>Cycling calendar: {% block title %}{% endblock %}</title>
-    </head>
+    <title>Cycling calendar: {% block title %}{% endblock %}</title>
+  </head>
+
   <body>
 
     <header>
@@ -21,11 +22,11 @@
         <!-- <a href="/authorize">google</a> -->
 
         <!-- <img id="header-image" src="/static/Images/header2.png" alt="cycling-header"> -->
-          <div class="google-logo-container">
-            <a href="/authorize">
+        <div class="google-logo-container">
+          <a href="#" onclick="openGoogleModal()" >
             <img src="/static/Images/google_logo.png" alt="google logo">
-            </a>
-          </div>
+          </a>
+        </div>
       </div>
     </header>
     <main>
