@@ -2,6 +2,17 @@
 
 My first programming project, a straightforward web application that presents professional cycling races scheduled for the 2023 season in a calendar format.
 
+## Screenshots
+
+<details>
+  <summary>Image 1</summary>
+  <img src="./static/Images/screenshots/main.png" name="main-page">
+</details>
+<details>
+  <summary>Image 2</summary>
+  <img src="./static/Images/screenshots/modal.png" name="modal">
+</details>
+
 ## Resources used
 
 - **Flask**: Backend framework.
