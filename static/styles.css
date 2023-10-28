@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto:wght@400;500;700&display=swap');
 
-
 /* =============== */
 /* |   general   | */
 /* =============== */
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
 }
 
@@ -15,14 +16,14 @@
   --surface-l2: #3b3b3b;
   --surface-l3: #474747;
 
-  --foreground-l1: #DCDCDC;
+  --foreground-l1: #dcdcdc;
 
-  --accent-blue-900: #102A43;
-  --accent-blue-800: #243B53;
-  --accent-blue-500: #627D98;
-  --accent-blue-100: #D9E2EC;
+  --accent-blue-900: #102a43;
+  --accent-blue-800: #243b53;
+  --accent-blue-500: #627d98;
+  --accent-blue-100: #d9e2ec;
 
-  --fc-button-bg-color: var(--surface-l2); 
+  --fc-button-bg-color: var(--surface-l2);
   --fc-button-border-color: var(--fc-border-color);
   --fc-button-text-color: var(--foreground-l1);
 
@@ -33,42 +34,42 @@
 }
 
 @font-face {
-    font-family: Nike;
-    src: url('/static/font/NIKE.ttf');
+  font-family: Nike;
+  src: url('/static/font/NIKE.ttf');
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    font-family: Montserrat, Roboto;
-    color: var(--foreground-l1);
-    background-color: var(--background);
-    overflow: hidden;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Montserrat, Roboto;
+  color: var(--foreground-l1);
+  background-color: var(--background);
+  overflow: hidden;
 }
-
 
 /* =============== */
 /* |    header   | */
 /* =============== */
 
 .header-container {
-    max-width: 100%;
-    min-height: 40px;
-    height: 10vh;
-    overflow: hidden;
-    background-color: var(--surface-l1);
-    display: flex;
-    align-items: center;
+  max-width: 100%;
+  min-height: 40px;
+  height: 10vh;
+  overflow: hidden;
+  background-color: var(--surface-l1);
+  display: flex;
+  align-items: center;
 }
 
 .header-container h1 {
-    font-family: Nike;
-    font-size: 2vw;
-    text-decoration: underline red;
-    
-    /* position: absolute; */
-    color: var(--foreground-l1);
-    padding-left: 1vw;
+  font-family: Nike;
+  font-size: 2vw;
+  text-decoration: underline red;
+
+  /* position: absolute; */
+  color: var(--foreground-l1);
+  padding-left: 1vw;
 }
 
 .header-container .google-logo-container {
@@ -79,18 +80,15 @@ html, body {
   border-radius: 10px;
   padding: 2px 2px 2px 2px;
   overflow: hidden;
-
 }
 
-.header-container .google-logo-container img{
+.header-container .google-logo-container img {
   height: 100%;
 }
 
-.header-container .google-logo-container :hover{
+.header-container .google-logo-container :hover {
   background-color: var(--surface-l3);
-
 }
-
 
 /* =============== */
 /* |    modal    | */
@@ -142,50 +140,50 @@ html, body {
   padding: 10px 15px;
 }
 
-
 /* =============== */
 /* |   calendar    | */
 /* =============== */
 
 .calendar-container {
-    margin-top: 4vh;
-    padding: 10px 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    height: 80vh ;
-    background-color: var(--surface-l1);
-    border-radius: 20px;
+  margin-top: 4vh;
+  padding: 10px 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  height: 80vh;
+  background-color: var(--surface-l1);
+  border-radius: 20px;
 }
 
 .fc {
   font-size: 1vw;
 }
 
-.fc, .fc *, .fc ::after, .fc ::before {
+.fc,
+.fc *,
+.fc ::after,
+.fc ::before {
   padding-left: 0.08vw;
   padding-right: 0.08vw;
-
 }
 
 .fc-daygrid-day.fc-day-today {
-    /* color: cyan; */
-    /* font-weight: bold; */
-    border-radius: 20px;
-  }
+  /* color: cyan; */
+  /* font-weight: bold; */
+  border-radius: 20px;
+}
 
 .fc .fc-daygrid-day-number {
-    padding-right: 47%;
-  }
+  padding-right: 47%;
+}
 
-  
 /* =============== */
 /* |   footer    | */
 /* =============== */
 
 footer {
-    position: absolute;
-    bottom: 0px;
-    margin-left: 70vw;
+  position: absolute;
+  bottom: 0px;
+  margin-left: 70vw;
 }
 
 footer button {
@@ -215,40 +213,36 @@ footer button span {
 }
 
 footer button img {
-    max-height: 30px;
-    height: auto;
+  max-height: 30px;
+  height: auto;
 }
-
 
 /* =============== */
 /* |    media    | */
 /* =============== */
 
 @media screen and (max-width: 700px) {
-    footer {
-        margin-left: 70vw;
-    }
-
-    footer button {
-        color: white;
-        width: 60px;
-    }
-    
-
-    .fc {
-        font-size: 3vw;
-    }
-    .header-container h1 {
-      font-size: 30px;
-      padding-left: 20px;
-    }
-
-    .header-container .google-logo-container {
-      height: 40px;
-    }
-        
+  footer {
+    margin-left: 70vw;
   }
 
+  footer button {
+    color: white;
+    width: 60px;
+  }
+
+  .fc {
+    font-size: 3vw;
+  }
+  .header-container h1 {
+    font-size: 30px;
+    padding-left: 20px;
+  }
+
+  .header-container .google-logo-container {
+    height: 40px;
+  }
+}
 
 /* =============== */
 /* |     form    | */
@@ -256,18 +250,16 @@ footer button img {
 
 .google-selection-form {
   padding: 15px;
-  }
+}
 
 .form-button-container {
   display: flex;
   justify-content: center;
-  }
-
-
+}
 
 .button {
   margin-top: 20px;
-  position:relative;
+  position: relative;
   width: 150px;
   height: 40px;
   cursor: pointer;
@@ -276,11 +268,13 @@ footer button img {
   /* border: 1px solid #4285F4; */
   border: none;
   border-radius: 5px;
-  background-color: #4285F4;
+  background-color: #4285f4;
   overflow: hidden;
 }
 
-.button, .button__icon, .button__text {
+.button,
+.button__icon,
+.button__text {
   transition: all 0.3s;
 }
 
@@ -320,22 +314,27 @@ footer button img {
 }
 
 .button:active .button__icon {
-  background-color: #4285F4;
+  background-color: #4285f4;
 }
 
 .button:active {
-  border: 1px solid #4285F4;
+  border: 1px solid #4285f4;
 }
-
 
 /* =============== */
 /* |    other    | */
 /* =============== */
 
-a:link { text-decoration: none; }
+a:link {
+  text-decoration: none;
+}
 
-a:visited { text-decoration: none; }
+a:visited {
+  text-decoration: none;
+}
 
 /* a:hover { text-decoration: none; } */
 
-a:active { text-decoration: none; }
+a:active {
+  text-decoration: none;
+}
