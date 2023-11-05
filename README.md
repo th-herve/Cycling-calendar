@@ -1,8 +1,8 @@
 # Cycling-calendar
 
-My first programming project, a straightforward web application that presents professional cycling races scheduled for the 2023 season in a calendar format.
+My first programming project, a straightforward web application that presents professional cycling races scheduled for the 2023 season in a calendar format. You can also add the races to your google calendar.
 
-**[Go to the live website.](https://cycling.th-herve.fr)**
+**[Go to the live website.](https://cycling.th-herve.fr)** 
 
 ## Screenshots
 
@@ -34,7 +34,7 @@ My first programming project, a straightforward web application that presents pr
 ###
 
 - **[Flask](https://github.com/pallets/flask/)**: Python backend framework.
-- **[Sport radar api](https://developer.sportradar.com/docs/read/Home)**: To retrieve the data.
+- **[Sport radar api](https://developer.sportradar.com/)**: To retrieve the data.
 - **[FullCalendar](https://fullcalendar.io/)**: JavaScript library for creating the calendar view.
 - **Google api**: Integration for adding races to the user's calendar. Google OAuth2 is used for authentication with the Google Calendar API.
 
