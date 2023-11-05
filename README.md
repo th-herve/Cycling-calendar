@@ -32,7 +32,7 @@ My first programming project, a straightforward web application that presents pr
 ###
 
 - **Flask**: Backend framework.
-- **Sport radar api**: To retrieve the data, see [here](https://developer.sportradar.com/docs/read/Home).
+- **[Sport radar api](https://developer.sportradar.com/docs/read/Home)**: To retrieve the data.
 - **FullCalendar**: JavaScript library for creating the calendar view, see [here](https://fullcalendar.io/)
 - **Google api**: Integration for adding races to the user's calendar. Google OAuth2 is used for authentication with the Google Calendar API.
 
