@@ -2,6 +2,8 @@
 
 My first programming project, a straightforward web application that presents professional cycling races scheduled for the 2023 season in a calendar format.
 
+**[Go to the live website.](https://cycling.th-herve.fr)**
+
 ## Screenshots
 
 <details>
@@ -31,9 +33,9 @@ My first programming project, a straightforward web application that presents pr
 
 ###
 
-- **Flask**: Backend framework.
+- **[Flask](https://github.com/pallets/flask/)**: Python backend framework.
 - **[Sport radar api](https://developer.sportradar.com/docs/read/Home)**: To retrieve the data.
-- **FullCalendar**: JavaScript library for creating the calendar view, see [here](https://fullcalendar.io/)
+- **[FullCalendar](https://fullcalendar.io/)**: JavaScript library for creating the calendar view.
 - **Google api**: Integration for adding races to the user's calendar. Google OAuth2 is used for authentication with the Google Calendar API.
 
 ## What I learned with this project
