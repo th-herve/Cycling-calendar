@@ -13,6 +13,7 @@ api_key = os.getenv("api_key")
 language_code = "en"
 
 MEN_2023_SEASON_ID = "sr:stage:1023889"
+MEN_2024_SEASON_ID = "sr:stage:1116073"
 
 
 # ╔═══════════════════════════════╗
@@ -20,7 +21,7 @@ MEN_2023_SEASON_ID = "sr:stage:1023889"
 # ╚═══════════════════════════════╝
 
 # return the season_data either from cache or api request                       source: indently (yt), Caching your api requests 
-def fetch_season_data(event_id, year = "2023", language_code = "en", update: bool = False):
+def fetch_season_data(event_id, year = "2024", language_code = "en", update: bool = False):
     # all seasons cache file should follow this naming convention 
     formated_id = event_id.replace(":","")
     event_cache_json = "data/" + formated_id + ".json"
@@ -33,7 +34,7 @@ def fetch_season_data(event_id, year = "2023", language_code = "en", update: boo
     if not event_data:
         print("Fetching new event local data, with api request")
         # make api request, if it fails, it will return none and the backup will be used instead
-        event_data = event_api_request(event_id,'season', year, language_code) 
+        event_data = event_api_request(event_id,'season', api_key , year, language_code) 
 
         if not event_data:
             backup = "data/backup_srstage1023889.json"
@@ -68,9 +69,9 @@ def format_season_info(season):
                             "id" : stage["id"],
                             "title": race["description"] +" "+ stage["description"], 
                             "date" : format_dateTime_to_time(stage["scheduled"]),
-                            "backgroundColor" : "#ED6F92" if id == "sr:stage:1052217"           # pink bg for the Giro 
-                                                else ("#e8c713" if id == "sr:stage:1023895"     # yellow bg for the Tour De France
-                                                else ( "#ff0000" if id == "sr:stage:1052491"    # red bg for the Vuelta
+                            "backgroundColor" : "#ED6F92" if id == "sr:stage:1139994"           # pink bg for the Giro 
+                                                else ("#e8c713" if id == "sr:stage:1116321"     # yellow bg for the Tour De France
+                                                else ( "#ff0000" if id == "sr:stage:1140212"    # red bg for the Vuelta
                                                 else "green"))                                  
                             }
 
@@ -127,7 +128,7 @@ def update_stages_cache_json(stages_cache_file, json_stages_data, stage_info, st
 # ╚═══════════════════════════════╝
 
 # api call to get the info of a given season
-def event_api_request(event_id, event_type, api_key = api_key, year = "2023", language_code = "en"):
+def event_api_request(event_id, event_type, api_key = api_key, year = "2024", language_code = "en"):
     url = "https://api.sportradar.us/cycling/trial/v2"
 
     if event_type == 'season':
@@ -214,7 +215,7 @@ def write_data_in_json(json_file, data):
         json.dump(data, file)
 
 if __name__ == "__main__":
-    data = fetch_season_data(MEN_2023_SEASON_ID)
+    data = fetch_season_data(MEN_2024_SEASON_ID)
     data = format_season_info(data)
     sorted_race = sorted(data, key=lambda x: x['title'])
     print(sorted_race)

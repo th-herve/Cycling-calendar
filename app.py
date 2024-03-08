@@ -26,14 +26,15 @@ flow = Flow.from_client_secrets_file(
     scopes=["openid", "https://www.googleapis.com/auth/calendar.events"],
 )
 
-flow.redirect_uri = "cycling.th-herve.fr"
+flow.redirect_uri = "https://cycling.th-herve.fr"
 
 
 # set the language_code TODO: set language selection
 language_code = "en"
 
 MEN_2023_SEASON_ID = "sr:stage:1023889"
-events = fetch_season_data(MEN_2023_SEASON_ID)
+MEN_2024_SEASON_ID = "sr:stage:1116073"
+events = fetch_season_data(MEN_2024_SEASON_ID)
 events = format_season_info(events)
 
 
