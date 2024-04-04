@@ -3,6 +3,7 @@
 My first programming project, a straightforward web application that presents professional cycling races scheduled for the 2023 season in a calendar format. You can also add the races to your google calendar.
 
 **[Go to the live website.](https://cycling.th-herve.fr)** 
+`!!` Some functionalities do not work anymore due to a change in the sportradar api.
 
 ## Screenshots
 
@@ -19,7 +20,7 @@ My first programming project, a straightforward web application that presents pr
 
 <div align="left">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="40" alt="python logo"  />
-  <img width="12" />
+  <img [width](width.md)="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" height="40" alt="flask logo"  />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo"  />
