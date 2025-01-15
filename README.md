@@ -39,12 +39,46 @@ My first programming project, a straightforward web application that presents pr
 - **[FullCalendar](https://fullcalendar.io/)**: JavaScript library for creating the calendar view.
 - **Google api**: Integration for adding races to the user's calendar. Google OAuth2 is used for authentication with the Google Calendar API.
 
-## What I learned with this project
+## How to run in dev environment
 
-- Building a web application with Flask.
-- Developing the frontend using HTML, CSS, and JavaScript.
-- Utilizing the FullCalendar JavaScript library.
-- Retrieving data from an external api.
-- Caching data for faster rendering.
-- Implementing the Google Calendar API to add events.
-- Configuring OAuth2 for Google authentication.
+### Optional: install python 3.12 along another version on the system
+
+Can fix problem with packages failing to install with newer version.
+
+```bash
+# install pyenv
+sudo pacman -S pyenv
+
+# install python 3.12
+pyenv install 3.12.0
+
+# check if installed
+pyenv versions # it should list a 3.12 version along the system version
+```
+
+It install another version of python with its binary in `~/.pyenv/versions/3.12.0/bin/python`
+Now when creating the virtual env, user this binary.
+
+### Create a virtual env
+
+```bash
+python -m venv .venv --clear
+
+# or if using pyenv
+~/.pyenv/versions/3.12.0/bin/python -m venv .venv --clear
+```
+
+### Launch the env and install requirement
+
+```bash
+source .venv/bin/activate
+
+pip install -r requirements.txt 
+```
+
+### Launch flask
+
+```bash
+# in the venv
+flask run
+```
