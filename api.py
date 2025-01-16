@@ -69,9 +69,9 @@ def format_season_info(season):
                             "id" : stage["id"],
                             "title": race["description"] +" "+ stage["description"], 
                             "date" : format_dateTime_to_time(stage["scheduled"]),
-                            "backgroundColor" : "#ED6F92" if id == "sr:stage:1139994"           # pink bg for the Giro 
-                                                else ("#e8c713" if id == "sr:stage:1116321"     # yellow bg for the Tour De France
-                                                else ( "#ff0000" if id == "sr:stage:1140212"    # red bg for the Vuelta
+                            "backgroundColor" : "#ED6F92" if id == "sr:stage:1257385"           # pink bg for the Giro 
+                                                else ("#e8c713" if id == "sr:stage:1221677"     # yellow bg for the Tour De France
+                                                else ( "#ff0000" if id == "sr:stage:1257665"    # red bg for the Vuelta
                                                 else "green"))                                  
                             }
 
