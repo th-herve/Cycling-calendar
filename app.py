@@ -34,7 +34,9 @@ language_code = "en"
 
 MEN_2023_SEASON_ID = "sr:stage:1023889"
 MEN_2024_SEASON_ID = "sr:stage:1116073"
-events = fetch_season_data(MEN_2024_SEASON_ID)
+MEN_2025_SEASON_ID = "sr:stage:1221671"
+
+events = fetch_season_data(MEN_2025_SEASON_ID)
 events = format_season_info(events)
 
 

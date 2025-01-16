@@ -14,14 +14,14 @@ language_code = "en"
 
 MEN_2023_SEASON_ID = "sr:stage:1023889"
 MEN_2024_SEASON_ID = "sr:stage:1116073"
-
+MEN_2025_SEASON_ID = "sr:stage:1221671"
 
 # ╔═══════════════════════════════╗
 # ║          Season info          ║
 # ╚═══════════════════════════════╝
 
 # return the season_data either from cache or api request                       source: indently (yt), Caching your api requests 
-def fetch_season_data(event_id, year = "2024", language_code = "en", update: bool = False):
+def fetch_season_data(event_id, year = "2025", language_code = "en", update: bool = False):
     # all seasons cache file should follow this naming convention 
     formated_id = event_id.replace(":","")
     event_cache_json = "data/" + formated_id + ".json"
@@ -128,7 +128,7 @@ def update_stages_cache_json(stages_cache_file, json_stages_data, stage_info, st
 # ╚═══════════════════════════════╝
 
 # api call to get the info of a given season
-def event_api_request(event_id, event_type, api_key = api_key, year = "2024", language_code = "en"):
+def event_api_request(event_id, event_type, api_key = api_key, year = "2025", language_code = "en"):
     url = "https://api.sportradar.us/cycling/trial/v2"
 
     if event_type == 'season':
@@ -137,6 +137,7 @@ def event_api_request(event_id, event_type, api_key = api_key, year = "2024", la
         type_code = 'summary'
 
     final_url = f"{url}/{language_code}/sport_events/{event_id}/{type_code}.json?api_key={api_key}" 
+    print(final_url)
 
     # try to retrive the api
     try:
@@ -215,7 +216,7 @@ def write_data_in_json(json_file, data):
         json.dump(data, file)
 
 if __name__ == "__main__":
-    data = fetch_season_data(MEN_2024_SEASON_ID)
+    data = fetch_season_data(MEN_2025_SEASON_ID)
     data = format_season_info(data)
     sorted_race = sorted(data, key=lambda x: x['title'])
     print(sorted_race)
