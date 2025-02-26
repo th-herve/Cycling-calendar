@@ -1,6 +1,6 @@
 # Cycling-calendar
 
-My first programming project, a straightforward web application that presents professional cycling races scheduled for the 2023 season in a calendar format. You can also add the races to your google calendar.
+My first programming project, a straightforward web application that presents professional cycling races scheduled in a calendar format. You can also add the races to your google calendar.
 
 **[Go to the live website.](https://cycling.th-herve.fr)** 
 `!!` Some functionalities do not work anymore due to a change in the sportradar api.
